@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+from keys import scrapperapi
 
 
 def clean(url,  tries=0):
@@ -29,7 +30,7 @@ def clean(url,  tries=0):
         print("Retrying over scrapper....")
         if tries>0:
             return extract_paragraphs(url, tries+1)
-        return clean("http://api.scraperapi.com?api_key=f86bd0a9f5e74a8b616c494a7682f4d2&url="+url, tries+1)
+        return clean(scrapperapi+url, tries+1)
 
 
 
@@ -62,7 +63,7 @@ def extract_paragraphs(url, tries=0):
             if tries>0:
                 return extract_paragraphs(url, tries+1)
                 
-            return extract_paragraphs("http://api.scraperapi.com?api_key=f86bd0a9f5e74a8b616c494a7682f4d2&url="+url, tries+1)
+            return extract_paragraphs(scrapperapi+url, tries+1)
             
     except Exception as e:
         print(f"An error occurred: {str(e)} for url: {url}")

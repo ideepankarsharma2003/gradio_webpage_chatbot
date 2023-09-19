@@ -22,7 +22,7 @@ import json
 import uuid 
 import shutil
 import requests
-from keys import OPEN_AI_KEY_ACTUAL
+from keys import *
 
 enable_box = gr.Textbox.update(value = None, placeholder = 'Upload your OpenAI API key',interactive = True)
 disable_box = gr.Textbox.update(value = 'OpenAI API key is Set', interactive = False)
@@ -78,7 +78,7 @@ def generate_context(query:str, num_urls:int):
     print(f'# urls: {num_urls}')
     if not query or not num_urls:
         raise gr.Error(message='Either query or number of urls are empty')
-    response= requests.post('https://qagen.paperbot.ai/extract_all_passages', json={
+    response= requests.post(qa_gen_api_extract_all_passages, json={
                                                                                     "query": query,
                                                                                     "num_urls": int(num_urls),
                                                                                     } )
@@ -114,7 +114,7 @@ def generate_paragraphs_out_of_query(query:str, num_urls:int):
     print(f'generate_paragraphs_out_of_query: {num_urls}')
     if not query or num_urls:
         raise gr.Error(message='Either query or number of urls are empty')
-    response= requests.post('https://qagen.paperbot.ai/extract_all_passages', json={
+    response= requests.post(qa_gen_api_extract_all_passages, json={
                                                                                     "query": "best cat ear headphones",
                                                                                     "num_keywords": 50,
                                                                                     "num_paragraphs": 20,
