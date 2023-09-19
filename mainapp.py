@@ -54,7 +54,7 @@ def get_response_website(history, query, url):
         result = chain({"question": query, 'chat_history':custom_app.chat_history},return_only_outputs=True)
         custom_app.chat_history += [(query, result["answer"])]
         print(f'result*: {result}')
-        custom_app.N = list(result['source_documents'][0])[1][1]['page']
+        # custom_app.N = list(result['source_documents'][0])[1][1]['page']
         for char in result['answer']:
            history[-1][-1] += char
            yield history,''
