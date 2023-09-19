@@ -82,8 +82,8 @@ class my_app_custom_v2:
         pdfsearch = Chroma.from_documents(documents, embeddings, collection_name= file_name,)
         chain = ConversationalRetrievalChain.from_llm(
                 ChatOpenAI(temperature=0.0, openai_api_key=self.OPENAI_API_KEY), 
-                # retriever=pdfsearch.as_retriever(search_type="similarity_score_threshold", search_kwargs={'score_threshold': 0.8}), # single score with maximum similarity
-                retriever=pdfsearch.as_retriever(search_kwargs={"k": 1}), # single score with maximum similarity
+                retriever=pdfsearch.as_retriever(search_type="similarity_score_threshold", search_kwargs={'score_threshold': 0.8}), # single score with maximum similarity
+                # retriever=pdfsearch.as_retriever(search_kwargs={"k": 1}), # single score with maximum similarity
                 return_source_documents=True,)
         return chain
     

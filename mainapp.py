@@ -160,7 +160,7 @@ with gr.Blocks() as demo:
             gen_submit_btn = gr.Button('submit')
     with gr.Row():           
         chatbot_gen = gr.Chatbot(value=[], elem_id='chatbot_gen').style(height=850)
-        gen_show_img = gr.Image(label='Generated PDF', tool='select' ).style(height=680)
+        # gen_show_img = gr.Image(label='Generated PDF', tool='select' ).style(height=680)
     
         
     # api_key.submit(
@@ -175,7 +175,7 @@ with gr.Blocks() as demo:
     gen_btn.click(
         fn=generate_context, 
         inputs=[search_url, num_urls],
-        outputs=[gen_show_img, chatbot_gen]
+        # outputs=[gen_show_img, chatbot_gen]
         )
     
     gen_submit_btn.click(
@@ -187,11 +187,11 @@ with gr.Blocks() as demo:
                                     fn=get_response_website,
                                     inputs = [chatbot_gen, gen_txt, search_url],
                                     outputs = [chatbot_gen,gen_txt]
-                                    # )
-                                    ).success(
-                                                fn=render_file,
-                                                # fn=render_first,
-                                                outputs=[gen_show_img])
+                                    )
+                                    # ).success(
+                                    #             fn=render_file,
+                                    #             # fn=render_first,
+                                    #             outputs=[gen_show_img])
     
 demo.queue()
 demo.launch()               
