@@ -21,7 +21,7 @@ You will also need an OpenAI API key to enable chat capabilities.
 1. Clone this repository to your local machine:
 
 ```bash
-git clone https://github.com/yourusername/gradio-webpage-chatbot.git
+git clone https://github.com/ideepankarsharma2003/URL_WEB_PAGE.git
 cd gradio-webpage-chatbot
 ```
 
@@ -51,14 +51,14 @@ python gradio_webpage_chatbot.py
 
 6. Click the "submit" button to interact with the chatbot. The chat history and generated PDF will be displayed on the right side of the application.
 
-## Screenshots
+## Screenshots <br>
 
-![Screenshot 2](screenshots/image-1.png)
+![Screenshot 2](screenshots/image-1.png) <br>
 
-![Screenshot 1](screenshots/image.png)
+![Screenshot 1](screenshots/image.png) <br>
 
 
-![Screenshot 3](screenshots/image-2.png)
+![Screenshot 3](screenshots/image-2.png) <br>
 
-![Screenshot 4](screenshots/image-3.png)
+![Screenshot 4](screenshots/image-3.png) <br>
 
