@@ -51,6 +51,53 @@ python gradio_webpage_chatbot.py
 
 6. Click the "submit" button to interact with the chatbot. The chat history and generated PDF will be displayed on the right side of the application.
 
+## Functions
+
+The `qa_gen_api_extract_all_passages` internally refers to:
+- **Extract All Passages Endpoint**
+
+The `extract_all_passages` endpoint is part of our proprietary API and is responsible for extracting paragraphs and URLs based on a provided query. It is designed to return relevant content from the web in response to user queries.
+
+- `Endpoint Description``
+
+- **URL:** `/extract_all_passages`
+- **Method:** POST
+- **Request Body:** JSON
+  - `query` (string): The user's query for content extraction.
+  - `num_urls` (integer): The number of URLs to search for content.
+- **Response:** JSON
+  - `paragraphs` (list of strings): Extracted paragraphs relevant to the query.
+  - `urls` (list of strings): URLs that were used for content extraction.
+
+- `Example Usage``
+
+You can make a POST request to the `/extract_all_passages` endpoint with the following JSON request body:
+
+```json
+{
+  "query": "Your query here",
+  "num_urls": 5
+}
+```
+
+The endpoint will respond with a JSON object containing the extracted paragraphs and URLs:
+```json
+
+{
+  "paragraphs": ["Extracted paragraph 1", "Extracted paragraph 2", ...],
+  "urls": ["URL 1", "URL 2", ...]
+}
+```
+
+
+## alternative: 
+Instead of using the api you can utilize the   `utils/cleaner.py` module:
+```python
+    extract_paragraphs(url, tries=0)
+```
+which will return a list of paragraphs from the given URL. Also notice `scrapperapi` is a proprietary variable which you need to drop or replace.
+
+
 ## Screenshots <br>
 
 ![Screenshot 2](screenshots/image-1.png) <br>
