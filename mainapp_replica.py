@@ -139,7 +139,7 @@ def generate_paragraphs_out_of_query(query:str, num_urls:int):
     
     
     
-with gr.Blocks() as demo:       
+with gr.Blocks(server_name= '0.0.0.0') as demo:       
     with gr.Row():
         # gr.HighlightedText("URL SECTION")
         gr.Label("URL WebPage Chatbot")
@@ -199,6 +199,6 @@ with gr.Blocks() as demo:
                                     #             outputs=[gen_show_img])
     
 demo.queue()
-demo.launch(share=True)               
+demo.launch()               
 
 
