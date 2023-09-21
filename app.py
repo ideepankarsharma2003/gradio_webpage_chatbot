@@ -19,7 +19,7 @@ from langchain.document_loaders import PyPDFLoader
 import fitz
 from PIL import Image
 from utils.cleaner import extract_paragraphs
-from utils.custom_app import custom_app
+from utils.custom_app import my_app_custom_v2
 from utils.create_pdf import create_pdf
 import os
 
@@ -37,17 +37,22 @@ from pydantic import BaseModel
 
 
 HISTORY= [] # history variable
+custom_app= my_app_custom_v2()
 
 class Keyword(BaseModel):
     query:str
-    num_keywords=50
-    num_paragraphs=20
+    # num_keywords=50
+    # num_paragraphs=20
     num_urls= 5
-    keyphrase_count= 4
+    # keyphrase_count= 4
 
 # helper functions
 
 def add_text(history, text: str):
+    print({
+        'text': text,
+        'history': history
+    }, end="\n\n")
     history = history + [(text,'')] 
     return history
 
@@ -62,6 +67,8 @@ def get_response_website(history, query):
         # # file.name= "demofile.pdf" # added by me
         # print(f'file name*get_response*: {file.name}') 
         # paragraphs= generate_context(url)
+        global custom_app
+        
         chain = custom_app("output.pdf")
         
         
@@ -90,6 +97,14 @@ async def index():
 
 @app.post('/generate_pdf_content')
 async def generate_pdf_content(keyword:Keyword):
+    if os.path.exists('output.pdf'):
+        print(f'Found output.pdf and hence deleting it')
+        os.remove('output.pdf')
+    global HISTORY
+    HISTORY= []
+    global custom_app
+    custom_app= my_app_custom_v2()
+    
     query= keyword.query
     num_urls= keyword.num_urls
     print(f'generate_paragraphs_out_of_query: {query}')
@@ -106,13 +121,9 @@ async def generate_pdf_content(keyword:Keyword):
             paragrahs= json.loads(response.content.decode(
                                                             'utf-8'
                                                         ))['paragraphs']
-            if os.path.exists('output.pdf'):
-                print(f'Found output.pdf and hence deleting it')
-                os.remove('output.pdf')
             create_pdf(paragrahs)
             is_content= f"YES 😁, buffer content: {query}" 
-            global HISTORY
-            HISTORY= []
+            
             return is_content
             
             

@@ -48,6 +48,7 @@ class my_app_custom_v2:
     def __call__(self, filename: str) -> Any:
 
         if self.count==0:
+            print(f"building chain for file: {filename}")
             self.chain = self.build_chain(filename)
             self.count+=1
         return self.chain
@@ -74,6 +75,7 @@ class my_app_custom_v2:
     def build_chain(self, file: str):
         documents, file_name = self.process_file(file)
         print(f'file name*build_chain*: {file_name}')
+        print(f'documents[:1]: {documents[:1]}')
         #Load embeddings model
         embeddings = OpenAIEmbeddings(openai_api_key=self.OPENAI_API_KEY) 
         # embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
