@@ -7,3 +7,6 @@ pypdf >="3.8.1"
 pymupdf >="1.22.2"
 bs4
 reportlab
+fastapi
+starlette
+gunicorn

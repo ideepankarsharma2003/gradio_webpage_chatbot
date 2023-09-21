@@ -1,5 +1,5 @@
 from typing import Any
-import gradio as gr
+# import gradio as gr
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.embeddings.sentence_transformer import SentenceTransformerEmbeddings
 from langchain.vectorstores import Chroma
@@ -20,17 +20,17 @@ import shutil
 import requests
 from keys import OPEN_AI_KEY_ACTUAL
 
-enable_box = gr.Textbox.update(value = None, placeholder = 'Upload your OpenAI API key',interactive = True)
-disable_box = gr.Textbox.update(value = 'OpenAI API key is Set', interactive = False)
+# enable_box = gr.Textbox.update(value = None, placeholder = 'Upload your OpenAI API key',interactive = True)
+# disable_box = gr.Textbox.update(value = 'OpenAI API key is Set', interactive = False)
 
-def set_apikey(api_key: str):
-        # app.OPENAI_API_KEY = api_key  
-        custom_app.OPENAI_API_KEY = OPEN_AI_KEY_ACTUAL
+# def set_apikey(api_key: str):
+#         # app.OPENAI_API_KEY = api_key  
+#         custom_app.OPENAI_API_KEY = OPEN_AI_KEY_ACTUAL
               
-        return disable_box
+#         return disable_box
     
-def enable_api_box():
-        return enable_box
+# def enable_api_box():
+#         return enable_box
 
 
 
@@ -82,7 +82,7 @@ class my_app_custom_v2:
         pdfsearch = Chroma.from_documents(documents, embeddings, collection_name= file_name,)
         chain = ConversationalRetrievalChain.from_llm(
                 ChatOpenAI(temperature=0.0, openai_api_key=self.OPENAI_API_KEY), 
-                retriever=pdfsearch.as_retriever(search_type="similarity_score_threshold", search_kwargs={'score_threshold': 0.8}), # single score with maximum similarity
+                retriever=pdfsearch.as_retriever(search_type="similarity_score_threshold", search_kwargs={'score_threshold': 0.7}), # single score with maximum similarity
                 # retriever=pdfsearch.as_retriever(search_kwargs={"k": 1}), # single score with maximum similarity
                 return_source_documents=True,)
         return chain

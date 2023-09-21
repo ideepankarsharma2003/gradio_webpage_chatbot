@@ -1,0 +1,25 @@
+#! /bin/bash
+
+NAME=webchat-fastapi
+DIR=/home/ubuntu/WebpageChatbot
+USER=ubuntu
+GROUP=ubuntu
+# WORKERS=2
+WORKERS=1
+WORKER_CLASS=uvicorn.workers.UvicornWorker
+VENV=$DIR/venv/bin/activate
+BIND=0.0.0.0:8056
+LOG_LEVEL=info
+
+cd $DIR
+source $VENV
+
+exec gunicorn app:app \
+	--name $NAME \
+	--workers $WORKERS \
+        --worker-class $WORKER_CLASS \
+	--user=$USER \
+	--group=$GROUP \
+	--bind=$BIND \
+	--log-file=- \
+	--timeout 0
